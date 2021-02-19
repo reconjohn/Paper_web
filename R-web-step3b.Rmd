@@ -1,0 +1,132 @@
+---
+title: ' '
+output:
+  html_document:
+    df_print: paged
+---
+
+<br> 
+<center><img src="cherryBlossom.png" width="500"></center>
+
+<center><h1> A post using R </h1></center>
+
+
+<div align="right">Authored by me </div>
+<a id='home'></a>
+I will show:
+
+1. [A table](#table)
+2. [A plot](#plot)
+3. [A bibliography](#bib).
+
+____
+
+<a id='table'></a>
+
+# A table
+
+Reading the data:
+
+```{r}
+# the location
+linkR='https://github.com/UW-eScience-WinterSchool/Python_Session/raw/main/demohdimil.RDS'
+# if location is website:
+MyFile=url(linkR)
+# get the data:
+fromPy=readRDS(file = MyFile) # no need for a library
+row.names(fromPy)=NULL   # reset indexes from Python.
+
+
+```
+
+Simple table for categorical data:
+```{r}
+table(fromPy$Regime_type)
+```
+Using **summary tools** for categorical data:
+
+```{r}
+# optional
+#remotes::install_github('rapporter/pander')
+```
+
+```{r, results='asis'}
+library(summarytools)
+freq(fromPy$Regime_type, 
+     style = "rmarkdown",
+     report.nas = FALSE,
+     cumul = FALSE)
+```
+
+Simple table for numerical table:
+
+```{r}
+summary(fromPy)
+```
+Using *summarytools*:
+
+```{r, results='asis'}
+descr(fromPy,stats = c("mean", "sd",'med'), transpose = TRUE, headings = TRUE)
+```
+
+For regressions:
+
+```{r}
+# hypotheses
+hypothesis1=formula(HDI~DemoIndex)
+hypothesis2=formula(HDI~DemoIndex + mil_expend)
+
+# running model
+
+regre1=lm(hypothesis1,data=fromPy)
+regre2=lm(hypothesis2,data=fromPy)
+```
+
+Classic tables:
+
+```{r}
+summary(regre1)
+```
+
+```{r}
+summary(regre2)
+```
+
+Better looking tables:
+
+```{r, results='asis'}
+library(stargazer)
+stargazer(regre1,type='html')
+```
+
+<div align="center">
+
+<style type="text/css">
+td{padding:0 15px 0 15px;}
+</style>
+
+```{r, results='asis',}
+library(stargazer)
+stargazer(regre1,regre2,type='html',
+          digits = 2)
+```
+
+ </div> 
+
+[home](#home)
+
+____
+
+<a id='plot'></a>
+
+# A plot
+
+[home](#home)
+
+____
+
+<a id='bib'></a>
+
+# References
+
+[home](#home)

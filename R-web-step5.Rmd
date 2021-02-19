@@ -1,0 +1,170 @@
+---
+title: ''
+output: html_document
+  
+---
+
+<br> 
+<center><img src="cherryBlossom.png" width="500"></center>
+
+<center><h1> A post using R </h1></center>
+
+
+<div align="right">Authored by me </div>
+<a id='home'></a>
+I will show:
+
+1. [A table](#table)
+2. [A plot](#plot)
+3. [A bibliography](#bib).
+
+____
+
+<a id='table'></a>
+
+## A table
+
+Reading the data:
+
+```{r}
+# the location
+linkR='https://github.com/UW-eScience-WinterSchool/Python_Session/raw/main/demohdimil.RDS'
+# if location is website:
+MyFile=url(linkR)
+# get the data:
+fromPy=readRDS(file = MyFile) # no need for a library
+row.names(fromPy)=NULL   # reset indexes from Python.
+
+
+```
+
+Simple table for categorical data:
+```{r}
+table(fromPy$Regime_type)
+```
+Using **summary tools** for categorical data:
+
+```{r}
+# optional
+#remotes::install_github('rapporter/pander')
+```
+
+```{r, results='asis'}
+library(summarytools)
+freq(fromPy$Regime_type, headings = F,
+     style = "rmarkdown",
+     report.nas = FALSE,
+     cumul = FALSE)
+```
+
+Simple table for numerical table:
+
+```{r}
+summary(fromPy)
+```
+Using *summarytools*:
+
+```{r, results='asis'}
+descr(fromPy,
+      stats = c("mean", "sd",'med','q1','min'),
+      transpose = TRUE, 
+      headings = F)
+```
+
+For regressions:
+
+```{r}
+# hypotheses
+hypothesis1=formula(HDI~DemoIndex)
+hypothesis2=formula(HDI~DemoIndex + mil_expend)
+
+# running model
+
+regre1=lm(hypothesis1,data=fromPy)
+regre2=lm(hypothesis2,data=fromPy)
+```
+
+Classic tables:
+
+```{r}
+summary(regre1)
+```
+
+```{r}
+summary(regre2)
+```
+
+Better looking tables:
+
+```{r, results='asis'}
+library(stargazer)
+stargazer(regre1,type='html')
+```
+
+<div align="center">
+
+<style type="text/css">
+td{padding:0 15px 0 15px;}
+</style>
+
+```{r, results='asis',}
+library(stargazer)
+stargazer(regre1,regre2,type='html',
+          digits = 2)
+```
+
+ </div> 
+[home](#home)
+
+
+____
+
+<a id='plot'></a>
+
+## A plot
+
+Showing plots is easy:
+
+```{r}
+library(ggplot2)
+
+base=ggplot(data=fromPy) + theme_classic()
+
+plot1=base + geom_boxplot(aes(x=Regime_type,
+                              y=mil_expend))
+plot1 + labs(title = "Arms to keep authoritarianism?",
+             subtitle = "Year 2019",
+             x="Democracy level",
+             y="Military expenditure per capita (US$)",
+             caption ="Source: The Economist"
+             )
+```
+
+
+
+```{r}
+#devtools::install_github("crsh/citr")
+```
+
+Finally, get a zotero account and download the app. In your local zotero create a folder (collection) biblio_example. Add this (paper)[https://science.sciencemag.org/content/103/2684/677].
+
+Download the folder in the folder you are saving this notebook. You will see  file **biblio_example.bib**. Add this to the YAML header:
+
+bibliography: biblio_example.bib
+
+csl: apa-6th-edition.csl
+
+Restart RStudio. 
+
+After this words insert a citation in parenthesis    or without them   .
+
+You can get more styles [here](https://github.com/citation-style-language/styles).
+
+[home](#home)
+
+____
+
+<a id='bib'></a>
+
+# References
+

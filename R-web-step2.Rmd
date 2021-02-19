@@ -1,0 +1,42 @@
+---
+title: " "
+output: html_notebook
+---
+
+<br> 
+<center><img src="cherryBlossom.png" width="500"></center>
+
+<center><h1> A post using R </h1></center>
+
+
+<div align="right">Authored by me </div>
+<a id='home'></a>
+I will show:
+
+1. [A table](#table)
+2. [A plot](#plot)
+3. [A bibliography](#bib).
+
+____
+
+<a id='table'></a>
+
+# A table
+
+[home](#home)
+
+____
+
+<a id='plot'></a>
+
+# A plot
+
+[home](#home)
+
+____
+
+<a id='bib'></a>
+
+# References
+
+[home](#home)
