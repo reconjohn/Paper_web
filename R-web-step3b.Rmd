@@ -105,13 +105,20 @@ stargazer(regre1,type='html')
 td{padding:0 15px 0 15px;}
 </style>
 
-```{r, results='asis',}
+```{r, results='asis'}
 library(stargazer)
 stargazer(regre1,regre2,type='html',
           digits = 2)
 ```
 
  </div> 
+ 
+ 
+```{r, results='asis'}
+library(stargazer)
+stargazer(regre1,regre2,type='html',
+          digits = 2)
+```
 
 [home](#home)
 

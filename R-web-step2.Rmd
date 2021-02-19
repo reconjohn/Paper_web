@@ -9,7 +9,7 @@ output: html_notebook
 <center><h1> A post using R </h1></center>
 
 
-<div align="right">Authored by me </div>
+<div align="right">Authored by Yohan </div>
 <a id='home'></a>
 I will show:
 

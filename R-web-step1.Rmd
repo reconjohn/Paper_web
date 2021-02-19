@@ -4,10 +4,12 @@
 <center><h1> A post using R </h1></center>
 
 
-<div align="right">Authored by me </div>
+<div align="right">Authored by Yohan </div>
 
 I will show:
 
 1. A table
 2. A plot
 3. A bibliography.
+
+
